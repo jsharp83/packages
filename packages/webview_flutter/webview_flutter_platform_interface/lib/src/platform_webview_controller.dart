@@ -286,6 +286,36 @@ abstract class PlatformWebViewController extends PlatformInterface {
       'setOnConsoleMessage is not implemented on the current platform',
     );
   }
+
+  /// Sets a callback that notifies the host application that the web page
+  /// wants to display a JavaScript alert() dialog.
+  Future<void> setOnJavaScriptAlertDialogCallback(
+      Future<void> Function(String message)
+          onJavaScriptAlertDialogCallback) async {
+    throw UnimplementedError(
+      'setOnJavaScriptAlertDialogCallback is not implemented on the current platform',
+    );
+  }
+
+  /// Sets a callback that notifies the host application that the web page
+  /// wants to display a JavaScript confirm() dialog.
+  Future<void> setOnJavaScriptConfirmDialogCallback(
+      Future<bool> Function(String message)
+          onJavaScriptConfirmDialogCallback) async {
+    throw UnimplementedError(
+      'setOnJavaScriptConfirmDialogCallback is not implemented on the current platform',
+    );
+  }
+
+  /// Sets a callback that notifies the host application that the web page
+  /// wants to display a JavaScript prompt() dialog.
+  Future<void> setOnJavaScriptTextInputDialogCallback(
+      Future<String> Function(String message, String? defaultText)
+          onJavaScriptTextInputDialogCallback) async {
+    throw UnimplementedError(
+      'setOnJavaScriptTextInputDialogCallback is not implemented on the current platform',
+    );
+  }
 }
 
 /// Describes the parameters necessary for registering a JavaScript channel.
