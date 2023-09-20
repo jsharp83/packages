@@ -90,13 +90,29 @@ void main() {
               WKFrameInfo frame,
               WKMediaCaptureType type,
             )? requestMediaCapturePermission,
+            Future<void> Function(
+                String message,
+                )? runJavaScriptAlertDialog,
+            Future<bool> Function(
+                String message,
+                )? runJavaScriptConfirmDialog,
+            Future<String> Function(
+                String prompt,
+                String? defaultText,
+                )? runJavaScriptTextInputDialog,
             InstanceManager? instanceManager,
           }) {
             return uiDelegate ??
                 CapturingUIDelegate(
-                  onCreateWebView: onCreateWebView,
-                  requestMediaCapturePermission: requestMediaCapturePermission,
-                );
+                    onCreateWebView: onCreateWebView,
+                    requestMediaCapturePermission:
+                        requestMediaCapturePermission,
+                    runJavaScriptAlertDialog:
+                    runJavaScriptAlertDialog,
+                    runJavaScriptConfirmDialog:
+                        runJavaScriptConfirmDialog,
+                    runJavaScriptTextInputDialog:
+                        runJavaScriptTextInputDialog);
           },
         ),
         instanceManager: instanceManager,
@@ -1224,6 +1240,9 @@ class CapturingUIDelegate extends WKUIDelegate {
   CapturingUIDelegate({
     super.onCreateWebView,
     super.requestMediaCapturePermission,
+    super.runJavaScriptAlertDialog,
+    super.runJavaScriptConfirmDialog,
+    super.runJavaScriptTextInputDialog,
     super.instanceManager,
   }) : super.detached() {
     lastCreatedDelegate = this;

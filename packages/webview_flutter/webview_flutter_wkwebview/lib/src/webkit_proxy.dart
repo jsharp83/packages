@@ -87,6 +87,14 @@ class WebKitProxy {
       WKFrameInfo frame,
       WKMediaCaptureType type,
     )? requestMediaCapturePermission,
+    Future<void> Function(
+      String message,
+    )? runJavaScriptAlertDialog,
+    Future<bool> Function(
+      String message,
+    )? runJavaScriptConfirmDialog,
+    Future<String> Function(String message, String? defaultText)?
+        runJavaScriptTextInputDialog,
     InstanceManager? instanceManager,
   }) createUIDelegate;
 }

@@ -1,3 +1,8 @@
+## 3.7.5
+
+* Add webkit interface for showing javascript alert message
+
+
 ## 3.7.4
 
 * Adds pub topics to package metadata.

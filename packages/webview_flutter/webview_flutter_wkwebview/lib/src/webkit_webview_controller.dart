@@ -216,6 +216,34 @@ class WebKitWebViewController extends PlatformWebViewController {
           return decisionCompleter.future;
         }
       },
+      runJavaScriptAlertDialog: (String message) async {
+        final Future<void> Function(String message)? callback =
+            _onJavaScriptAlertDialogCallback;
+        if (callback != null) {
+          await callback.call(message);
+          return;
+        }
+      },
+      runJavaScriptConfirmDialog: (String message) async {
+        final Future<bool> Function(String message)? callback =
+            _onJavaScriptConfirmDialogCallback;
+        if (callback != null) {
+          final bool result = await callback.call(message);
+          return result;
+        }
+
+        return false;
+      },
+      runJavaScriptTextInputDialog: (String prompt, String? defaultText) async {
+        final Future<String> Function(String prompt, String? defaultText)?
+        callback = _onJavaScriptTextInputDialogCallback;
+        if (callback != null) {
+          final String result = await callback.call(prompt, defaultText);
+          return result;
+        }
+
+        return '';
+      },
     );
 
     _webView.setUIDelegate(_uiDelegate);
@@ -270,6 +298,11 @@ class WebKitWebViewController extends PlatformWebViewController {
   WebKitNavigationDelegate? _currentNavigationDelegate;
 
   void Function(PlatformWebViewPermissionRequest)? _onPermissionRequestCallback;
+
+  Future<void> Function(String message)? _onJavaScriptAlertDialogCallback;
+  Future<bool> Function(String message)? _onJavaScriptConfirmDialogCallback;
+  Future<String> Function(String message, String? defaultText)?
+      _onJavaScriptTextInputDialogCallback;
 
   WebKitWebViewControllerCreationParams get _webKitParams =>
       params as WebKitWebViewControllerCreationParams;
@@ -557,6 +590,27 @@ class WebKitWebViewController extends PlatformWebViewController {
   /// Defaults to true in previous versions.
   Future<void> setInspectable(bool inspectable) {
     return _webView.setInspectable(inspectable);
+  }
+
+  @override
+  Future<void> setOnJavaScriptAlertDialogCallback(
+      Future<void> Function(String message)
+          onJavaScriptAlertDialogCallback) async {
+    _onJavaScriptAlertDialogCallback = onJavaScriptAlertDialogCallback;
+  }
+
+  @override
+  Future<void> setOnJavaScriptConfirmDialogCallback(
+      Future<bool> Function(String message)
+          onJavaScriptConfirmDialogCallback) async {
+    _onJavaScriptConfirmDialogCallback = onJavaScriptConfirmDialogCallback;
+  }
+
+  @override
+  Future<void> setOnJavaScriptTextInputDialogCallback(
+      Future<String> Function(String message, String? defaultText)
+          onJavaScriptTextInputDialogCallback) async {
+    _onJavaScriptTextInputDialogCallback = onJavaScriptTextInputDialogCallback;
   }
 }
 
