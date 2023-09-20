@@ -892,6 +892,30 @@ class WebChromeClientHostApiImpl extends WebChromeClientHostApi {
       value,
     );
   }
+
+  Future<void> setHasJavaScriptAlertCallbackFromInstance(
+    WebChromeClient instance,
+    bool value,
+  ) {
+    return setHasJavaScriptAlertCallback(
+        instanceManager.getIdentifier(instance)!, value);
+  }
+
+  Future<void> setHasJavaScriptConfirmCallbackFromInstance(
+      WebChromeClient instance,
+      bool value,
+      ) {
+    return setHasJavaScriptConfirmCallback(
+        instanceManager.getIdentifier(instance)!, value);
+  }
+
+  Future<void> setHasJavaScriptPromptCallbackFromInstance(
+      WebChromeClient instance,
+      bool value,
+      ) {
+    return setHasJavaScriptPromptCallback(
+        instanceManager.getIdentifier(instance)!, value);
+  }
 }
 
 /// Flutter api implementation for [DownloadListener].
@@ -1016,6 +1040,30 @@ class WebChromeClientFlutterApiImpl extends WebChromeClientFlutterApi {
         instance,
       );
     }
+  }
+
+  @override
+  Future<void> onHandleJavaScriptAlert(int instanceId, String message) {
+    final WebChromeClient instance =
+    instanceManager.getInstanceWithWeakReference(instanceId)!;
+
+    return instance.onHandleJavaScriptAlert!(message);
+  }
+
+  @override
+  Future<bool> onHandleJavaScriptConfirm(int instanceId, String message) {
+    final WebChromeClient instance =
+    instanceManager.getInstanceWithWeakReference(instanceId)!;
+
+    return instance.onHandleJavaScriptConfirm!(message);
+  }
+
+  @override
+  Future<String> onHandleJavaScriptPrompt(int instanceId, String message, String defaultValue) {
+    final WebChromeClient instance =
+    instanceManager.getInstanceWithWeakReference(instanceId)!;
+
+    return instance.onHandleJavaScriptPrompt!(message, defaultValue);
   }
 }
 

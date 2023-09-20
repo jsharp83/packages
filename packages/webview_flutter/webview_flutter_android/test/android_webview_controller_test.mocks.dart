@@ -739,8 +739,8 @@ class MockAndroidWebViewController extends _i1.Mock
       ) as _i9.Future<void>);
   @override
   _i9.Future<void> setCustomWidgetCallbacks({
-    _i8.OnShowCustomWidgetCallback? onShowCustomWidget,
-    _i8.OnHideCustomWidgetCallback? onHideCustomWidget,
+    required _i8.OnShowCustomWidgetCallback? onShowCustomWidget,
+    required _i8.OnHideCustomWidgetCallback? onHideCustomWidget,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -750,6 +750,99 @@ class MockAndroidWebViewController extends _i1.Mock
             #onShowCustomWidget: onShowCustomWidget,
             #onHideCustomWidget: onHideCustomWidget,
           },
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+  @override
+  _i9.Future<void> setJavaScriptAlertDialogCallback(
+          _i9.Future<void> Function(String)? javaScriptAlertDialogCallback) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setJavaScriptAlertDialogCallback,
+          [javaScriptAlertDialogCallback],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+  @override
+  _i9.Future<void> setJavaScriptConfirmDialogCallback(
+          _i9.Future<bool> Function(String)? javaScriptConfirmDialogCallback) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setJavaScriptConfirmDialogCallback,
+          [javaScriptConfirmDialogCallback],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+  @override
+  _i9.Future<void> setJavaScriptTextInputDialogCallback(
+          _i9.Future<String> Function(
+            String,
+            String?,
+          )? javaScriptTextInputDialogCallback) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setJavaScriptTextInputDialogCallback,
+          [javaScriptTextInputDialogCallback],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+  @override
+  _i9.Future<String?> getUserAgent() => (super.noSuchMethod(
+        Invocation.method(
+          #getUserAgent,
+          [],
+        ),
+        returnValue: _i9.Future<String?>.value(),
+        returnValueForMissingStub: _i9.Future<String?>.value(),
+      ) as _i9.Future<String?>);
+  @override
+  _i9.Future<void> setOnConsoleMessage(
+          void Function(_i3.JavaScriptConsoleMessage)? onConsoleMessage) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setOnConsoleMessage,
+          [onConsoleMessage],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+  @override
+  _i9.Future<void> setOnJavaScriptAlertDialogCallback(
+          _i9.Future<void> Function(String)? onJavaScriptAlertDialogCallback) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setOnJavaScriptAlertDialogCallback,
+          [onJavaScriptAlertDialogCallback],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+  @override
+  _i9.Future<void> setOnJavaScriptConfirmDialogCallback(
+          _i9.Future<bool> Function(String)?
+              onJavaScriptConfirmDialogCallback) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setOnJavaScriptConfirmDialogCallback,
+          [onJavaScriptConfirmDialogCallback],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+  @override
+  _i9.Future<void> setOnJavaScriptTextInputDialogCallback(
+          _i9.Future<String> Function(
+            String,
+            String?,
+          )? onJavaScriptTextInputDialogCallback) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setOnJavaScriptTextInputDialogCallback,
+          [onJavaScriptTextInputDialogCallback],
         ),
         returnValue: _i9.Future<void>.value(),
         returnValueForMissingStub: _i9.Future<void>.value(),
@@ -780,6 +873,12 @@ class MockAndroidWebViewProxy extends _i1.Mock
       String,
       _i2.GeolocationPermissionsCallback,
     )? onGeolocationPermissionsShowPrompt,
+    _i9.Future<void> Function(String)? onHandleJavaScriptAlert,
+    _i9.Future<bool> Function(String)? onHandleJavaScriptConfirm,
+    _i9.Future<String> Function(
+      String,
+      String,
+    )? onHandleJavaScriptPrompt,
     void Function(_i2.WebChromeClient)? onHideCustomView,
     void Function(
       _i2.WebChromeClient,
@@ -807,6 +906,12 @@ class MockAndroidWebViewProxy extends _i1.Mock
             String,
             _i2.GeolocationPermissionsCallback,
           )? onGeolocationPermissionsShowPrompt,
+          _i9.Future<void> Function(String)? onHandleJavaScriptAlert,
+          _i9.Future<bool> Function(String)? onHandleJavaScriptConfirm,
+          _i9.Future<String> Function(
+            String,
+            String,
+          )? onHandleJavaScriptPrompt,
           void Function(_i2.WebChromeClient)? onHideCustomView,
           void Function(
             _i2.WebChromeClient,
@@ -837,6 +942,12 @@ class MockAndroidWebViewProxy extends _i1.Mock
             String,
             _i2.GeolocationPermissionsCallback,
           )? onGeolocationPermissionsShowPrompt,
+          _i9.Future<void> Function(String)? onHandleJavaScriptAlert,
+          _i9.Future<bool> Function(String)? onHandleJavaScriptConfirm,
+          _i9.Future<String> Function(
+            String,
+            String,
+          )? onHandleJavaScriptPrompt,
           void Function(_i2.WebChromeClient)? onHideCustomView,
           void Function(
             _i2.WebChromeClient,
@@ -866,6 +977,12 @@ class MockAndroidWebViewProxy extends _i1.Mock
           String,
           _i2.GeolocationPermissionsCallback,
         )? onGeolocationPermissionsShowPrompt,
+        _i9.Future<void> Function(String)? onHandleJavaScriptAlert,
+        _i9.Future<bool> Function(String)? onHandleJavaScriptConfirm,
+        _i9.Future<String> Function(
+          String,
+          String,
+        )? onHandleJavaScriptPrompt,
         void Function(_i2.WebChromeClient)? onHideCustomView,
         void Function(
           _i2.WebChromeClient,
@@ -1774,6 +1891,36 @@ class MockWebChromeClient extends _i1.Mock implements _i2.WebChromeClient {
       (super.noSuchMethod(
         Invocation.method(
           #setSynchronousReturnValueForOnShowFileChooser,
+          [value],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+  @override
+  _i9.Future<void> setHasJavaScriptAlertCallback(bool? value) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setHasJavaScriptAlertCallback,
+          [value],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+  @override
+  _i9.Future<void> setHasJavaScriptConfirmCallback(bool? value) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setHasJavaScriptConfirmCallback,
+          [value],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+  @override
+  _i9.Future<void> setHasJavaScriptPromptCallback(bool? value) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setHasJavaScriptPromptCallback,
           [value],
         ),
         returnValue: _i9.Future<void>.value(),

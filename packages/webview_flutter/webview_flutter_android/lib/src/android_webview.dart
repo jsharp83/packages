@@ -1047,6 +1047,12 @@ class WebChromeClient extends JavaObject {
     this.onGeolocationPermissionsHidePrompt,
     this.onShowCustomView,
     this.onHideCustomView,
+    this.onHandleJavaScriptAlert,
+    this.onHandleJavaScriptConfirm,
+    this.onHandleJavaScriptPrompt,
+    this.hasJavaScriptAlertCallback,
+    this.hasJavaScriptConfirmCallback,
+    this.hasJavaScriptPromptCallback,
     @visibleForTesting super.binaryMessenger,
     @visibleForTesting super.instanceManager,
   }) : super.detached() {
@@ -1068,6 +1074,12 @@ class WebChromeClient extends JavaObject {
     this.onGeolocationPermissionsHidePrompt,
     this.onShowCustomView,
     this.onHideCustomView,
+    this.onHandleJavaScriptAlert,
+    this.onHandleJavaScriptConfirm,
+    this.onHandleJavaScriptPrompt,
+    this.hasJavaScriptAlertCallback,
+    this.hasJavaScriptConfirmCallback,
+    this.hasJavaScriptPromptCallback,
     super.binaryMessenger,
     super.instanceManager,
   }) : super.detached();
@@ -1121,6 +1133,14 @@ class WebChromeClient extends JavaObject {
   /// mode.
   final HideCustomViewCallback? onHideCustomView;
 
+  final Future<void> Function(String message)? onHandleJavaScriptAlert;
+  final Future<bool> Function(String message)? onHandleJavaScriptConfirm;
+  final Future<String> Function(String message, String defaultValue)? onHandleJavaScriptPrompt;
+
+  final bool Function()? hasJavaScriptAlertCallback;
+  final bool Function()? hasJavaScriptConfirmCallback;
+  final bool Function()? hasJavaScriptPromptCallback;
+
   /// Sets the required synchronous return value for the Java method,
   /// `WebChromeClient.onShowFileChooser(...)`.
   ///
@@ -1150,6 +1170,25 @@ class WebChromeClient extends JavaObject {
     );
   }
 
+  Future<void> setHasJavaScriptAlertCallback(
+    bool value,
+  ) {
+    return api.setHasJavaScriptAlertCallbackFromInstance(this, value);
+  }
+
+  Future<void> setHasJavaScriptConfirmCallback(
+      bool value,
+      ) {
+    return api.setHasJavaScriptConfirmCallbackFromInstance(this, value);
+  }
+
+  Future<void> setHasJavaScriptPromptCallback(
+      bool value,
+      ) {
+    return api.setHasJavaScriptPromptCallbackFromInstance(this, value);
+  }
+
+
   @override
   WebChromeClient copy() {
     return WebChromeClient.detached(
@@ -1160,6 +1199,12 @@ class WebChromeClient extends JavaObject {
       onGeolocationPermissionsHidePrompt: onGeolocationPermissionsHidePrompt,
       onShowCustomView: onShowCustomView,
       onHideCustomView: onHideCustomView,
+      onHandleJavaScriptAlert: onHandleJavaScriptAlert,
+      onHandleJavaScriptConfirm: onHandleJavaScriptConfirm,
+      onHandleJavaScriptPrompt: onHandleJavaScriptPrompt,
+      hasJavaScriptAlertCallback: hasJavaScriptAlertCallback,
+      hasJavaScriptConfirmCallback: hasJavaScriptConfirmCallback,
+      hasJavaScriptPromptCallback: hasJavaScriptPromptCallback,
       binaryMessenger: _api.binaryMessenger,
       instanceManager: _api.instanceManager,
     );

@@ -11,6 +11,7 @@ import android.webkit.PermissionRequest;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import io.flutter.plugin.common.BinaryMessenger;
 import io.flutter.plugins.webviewflutter.GeneratedAndroidWebView.WebChromeClientFlutterApi;
@@ -147,6 +148,49 @@ public class WebChromeClientFlutterApiImpl extends WebChromeClientFlutterApi {
     super.onHideCustomView(
         Objects.requireNonNull(instanceManager.getIdentifierForStrongReference(instance)),
         callback);
+  }
+
+  /**
+   * Sends a message to Dart to call `WebChromeClient.runJavaScriptDialog` on the Dart object
+   * representing `instance`.
+   */
+
+  public void onHandleJavaScriptAlert(
+          @NonNull WebChromeClient instance,
+          @NonNull String message,
+          @NonNull WebChromeClientFlutterApi.Reply<Void> callback
+            ) {
+    super.onHandleJavaScriptAlert(
+            Objects.requireNonNull(instanceManager.getIdentifierForStrongReference(instance)),
+            message,
+            callback
+    );
+  }
+
+  public void onHandleJavaScriptConfirm(
+          @NonNull WebChromeClient instance,
+          @NonNull String message,
+          @NonNull WebChromeClientFlutterApi.Reply<Boolean> callback
+  ) {
+    super.onHandleJavaScriptConfirm(
+            Objects.requireNonNull(instanceManager.getIdentifierForStrongReference(instance)),
+            message,
+            callback
+    );
+  }
+
+  public void onHandleJavaScriptPrompt(
+          @NonNull WebChromeClient instance,
+          @NonNull String message,
+          @Nullable String defaultText,
+          @NonNull WebChromeClientFlutterApi.Reply<String> callback
+  ) {
+    super.onHandleJavaScriptPrompt(
+            Objects.requireNonNull(instanceManager.getIdentifierForStrongReference(instance)),
+            message,
+            defaultText,
+            callback
+    );
   }
 
   private long getIdentifierForClient(WebChromeClient webChromeClient) {

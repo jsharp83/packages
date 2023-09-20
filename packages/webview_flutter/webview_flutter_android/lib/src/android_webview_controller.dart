@@ -13,6 +13,7 @@ import 'package:webview_flutter_platform_interface/webview_flutter_platform_inte
 
 import 'android_proxy.dart';
 import 'android_webview.dart' as android_webview;
+import 'android_webview_api_impls.dart';
 import 'instance_manager.dart';
 import 'platform_views_service_proxy.dart';
 import 'weak_reference_utils.dart';
@@ -231,6 +232,35 @@ class AndroidWebViewController extends PlatformWebViewController {
         };
       },
     ),
+    onHandleJavaScriptAlert: withWeakReferenceTo(this, (WeakReference<AndroidWebViewController> weakReference) {
+      return (String message) async {
+        final Future<void> Function(String)? callback = _onJavaScriptAlertCallback;
+        if (callback != null) {
+          await callback.call(message);
+        }
+        return;
+      };
+    }),
+    onHandleJavaScriptConfirm: withWeakReferenceTo(this, (WeakReference<AndroidWebViewController> weakReference) {
+      return (String message) async {
+        final Future<bool> Function(String)? callback = _onJavaScriptConfirmCallback;
+        if (callback != null) {
+          final bool result = await callback.call(message);
+          return result;
+        }
+        return false;
+      };
+    }),
+    onHandleJavaScriptPrompt: withWeakReferenceTo(this, (WeakReference<AndroidWebViewController> weakReference) {
+      return (String message, String defaultText) async {
+        final Future<String> Function(String, String?)? callback = _onJavaScriptPromptCallback;
+        if (callback != null) {
+          final String result = await callback.call(message, defaultText);
+          return result;
+        }
+        return '';
+      };
+    }),
   );
 
   /// The native [android_webview.FlutterAssetManager] allows managing assets.
@@ -254,6 +284,11 @@ class AndroidWebViewController extends PlatformWebViewController {
   OnHideCustomWidgetCallback? _onHideCustomWidgetCallback;
 
   void Function(PlatformWebViewPermissionRequest)? _onPermissionRequestCallback;
+
+  Future<void> Function(String message)? _onJavaScriptAlertCallback;
+  Future<bool> Function(String message)? _onJavaScriptConfirmCallback;
+  Future<String> Function(String message, String? defaultText)?
+      _onJavaScriptPromptCallback;
 
   /// Whether to enable the platform's webview content debugging tools.
   ///
@@ -565,6 +600,30 @@ class AndroidWebViewController extends PlatformWebViewController {
   }) async {
     _onShowCustomWidgetCallback = onShowCustomWidget;
     _onHideCustomWidgetCallback = onHideCustomWidget;
+  }
+
+  @override
+  Future<void> setJavaScriptAlertDialogCallback(
+      Future<void> Function(String message)
+          javaScriptAlertDialogCallback) async {
+    _onJavaScriptAlertCallback = javaScriptAlertDialogCallback;
+    return _webChromeClient.setHasJavaScriptAlertCallback(true);
+  }
+
+  @override
+  Future<void> setJavaScriptConfirmDialogCallback(
+      Future<bool> Function(String message)
+          javaScriptConfirmDialogCallback) async {
+    _onJavaScriptConfirmCallback = javaScriptConfirmDialogCallback;
+    return _webChromeClient.setHasJavaScriptConfirmCallback(true);
+  }
+
+  @override
+  Future<void> setJavaScriptTextInputDialogCallback(
+      Future<String> Function(String message, String? defaultText)
+          javaScriptTextInputDialogCallback) async {
+    _onJavaScriptPromptCallback = javaScriptTextInputDialogCallback;
+    return _webChromeClient.setHasJavaScriptPromptCallback(true);
   }
 }
 

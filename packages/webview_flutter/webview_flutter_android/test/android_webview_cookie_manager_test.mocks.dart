@@ -475,8 +475,8 @@ class MockAndroidWebViewController extends _i1.Mock
       ) as _i5.Future<void>);
   @override
   _i5.Future<void> setCustomWidgetCallbacks({
-    _i6.OnShowCustomWidgetCallback? onShowCustomWidget,
-    _i6.OnHideCustomWidgetCallback? onHideCustomWidget,
+    required _i6.OnShowCustomWidgetCallback? onShowCustomWidget,
+    required _i6.OnHideCustomWidgetCallback? onHideCustomWidget,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -486,6 +486,98 @@ class MockAndroidWebViewController extends _i1.Mock
             #onShowCustomWidget: onShowCustomWidget,
             #onHideCustomWidget: onHideCustomWidget,
           },
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+  @override
+  _i5.Future<void> setJavaScriptAlertDialogCallback(
+          _i5.Future<void> Function(String)? javaScriptAlertDialogCallback) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setJavaScriptAlertDialogCallback,
+          [javaScriptAlertDialogCallback],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+  @override
+  _i5.Future<void> setJavaScriptConfirmDialogCallback(
+          _i5.Future<bool> Function(String)? javaScriptConfirmDialogCallback) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setJavaScriptConfirmDialogCallback,
+          [javaScriptConfirmDialogCallback],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+  @override
+  _i5.Future<void> setJavaScriptTextInputDialogCallback(
+          _i5.Future<String> Function(
+            String,
+            String?,
+          )? javaScriptTextInputDialogCallback) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setJavaScriptTextInputDialogCallback,
+          [javaScriptTextInputDialogCallback],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+  @override
+  _i5.Future<String?> getUserAgent() => (super.noSuchMethod(
+        Invocation.method(
+          #getUserAgent,
+          [],
+        ),
+        returnValue: _i5.Future<String?>.value(),
+      ) as _i5.Future<String?>);
+  @override
+  _i5.Future<void> setOnConsoleMessage(
+          void Function(_i3.JavaScriptConsoleMessage)? onConsoleMessage) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setOnConsoleMessage,
+          [onConsoleMessage],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+  @override
+  _i5.Future<void> setOnJavaScriptAlertDialogCallback(
+          _i5.Future<void> Function(String)? onJavaScriptAlertDialogCallback) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setOnJavaScriptAlertDialogCallback,
+          [onJavaScriptAlertDialogCallback],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+  @override
+  _i5.Future<void> setOnJavaScriptConfirmDialogCallback(
+          _i5.Future<bool> Function(String)?
+              onJavaScriptConfirmDialogCallback) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setOnJavaScriptConfirmDialogCallback,
+          [onJavaScriptConfirmDialogCallback],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+  @override
+  _i5.Future<void> setOnJavaScriptTextInputDialogCallback(
+          _i5.Future<String> Function(
+            String,
+            String?,
+          )? onJavaScriptTextInputDialogCallback) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setOnJavaScriptTextInputDialogCallback,
+          [onJavaScriptTextInputDialogCallback],
         ),
         returnValue: _i5.Future<void>.value(),
         returnValueForMissingStub: _i5.Future<void>.value(),

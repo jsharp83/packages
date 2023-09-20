@@ -10,6 +10,8 @@ import android.os.Build;
 import android.os.Message;
 import android.view.View;
 import android.webkit.GeolocationPermissions;
+import android.webkit.JsPromptResult;
+import android.webkit.JsResult;
 import android.webkit.PermissionRequest;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
@@ -40,6 +42,10 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
   public static class WebChromeClientImpl extends SecureWebChromeClient {
     private final WebChromeClientFlutterApiImpl flutterApi;
     private boolean returnValueForOnShowFileChooser = false;
+
+    private boolean hasJavaScriptAlertCallback = false;
+    private boolean hasJavaScriptConfirmCallback = false;
+    private boolean hasJavaScriptPromptCallback = false;
 
     /**
      * Creates a {@link WebChromeClient} that passes arguments of callbacks methods to Dart.
@@ -110,6 +116,64 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
     /** Sets return value for {@link #onShowFileChooser}. */
     public void setReturnValueForOnShowFileChooser(boolean value) {
       returnValueForOnShowFileChooser = value;
+    }
+
+    public void setHasJavaScriptAlertCallback(boolean value) {
+      hasJavaScriptAlertCallback = value;
+    }
+
+    public void setHasJavaScriptConfirmCallback(boolean value) {
+      hasJavaScriptConfirmCallback = value;
+    }
+
+    public void setHasJavaScriptPromptCallback(boolean value) {
+      hasJavaScriptPromptCallback = value;
+    }
+
+
+    @Override
+    public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
+      if( hasJavaScriptAlertCallback ) {
+        flutterApi.onHandleJavaScriptAlert(this, message, reply -> {
+          result.confirm();
+        });
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    @Override
+    public boolean onJsConfirm(WebView view, String url, String message, JsResult result) {
+      if( hasJavaScriptConfirmCallback ) {
+        flutterApi.onHandleJavaScriptConfirm(this, message, reply -> {
+          if(reply) {
+            result.confirm();
+          } else {
+            result.cancel();
+          }
+        });
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    @Override
+    public boolean onJsPrompt(WebView view, String url, String message, String defaultValue, JsPromptResult result) {
+      if( hasJavaScriptPromptCallback ) {
+        flutterApi.onHandleJavaScriptPrompt(this, message, defaultValue, reply -> {
+          @Nullable String inputMessage = reply;
+          if(inputMessage != null) {
+            result.confirm(inputMessage);
+          } else {
+            result.cancel();
+          }
+        });
+        return true;
+      } else {
+        return false;
+      }
     }
   }
 
@@ -245,5 +309,21 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
     final WebChromeClientImpl webChromeClient =
         Objects.requireNonNull(instanceManager.getInstance(instanceId));
     webChromeClient.setReturnValueForOnShowFileChooser(value);
+  }
+
+  public void setHasJavaScriptAlertCallback(@NonNull Long instanceId, @NonNull Boolean value) {
+    final WebChromeClientImpl webChromeClient =
+            Objects.requireNonNull(instanceManager.getInstance(instanceId));
+    webChromeClient.setHasJavaScriptAlertCallback(value);
+  }
+  public void setHasJavaScriptConfirmCallback(@NonNull Long instanceId, @NonNull Boolean value) {
+    final WebChromeClientImpl webChromeClient =
+            Objects.requireNonNull(instanceManager.getInstance(instanceId));
+    webChromeClient.setHasJavaScriptConfirmCallback(value);
+  }
+  public void setHasJavaScriptPromptCallback(@NonNull Long instanceId, @NonNull Boolean value) {
+    final WebChromeClientImpl webChromeClient =
+            Objects.requireNonNull(instanceManager.getInstance(instanceId));
+    webChromeClient.setHasJavaScriptPromptCallback(value);
   }
 }

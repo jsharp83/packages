@@ -73,6 +73,25 @@ const String kTransparentBackgroundPage = '''
 </html>
 ''';
 
+const String kAlertTestPage = '''
+<html>  
+   <head>     
+      <script type = "text/javascript">  
+            function showAlert() {      
+               alert ("This is an alert dialog box");  
+            }  
+      </script>       
+   </head>  
+     
+   <body>  
+      <p> Click the following button to see the effect </p>        
+      <form>  
+         <input type = "button" value = "Click me" onclick = "showAlert();" />  
+      </form>       
+   </body>  
+</html>  
+''';
+
 class WebViewExample extends StatefulWidget {
   const WebViewExample({super.key, this.cookieManager});
 
@@ -202,6 +221,7 @@ enum MenuOptions {
   transparentBackground,
   setCookie,
   videoExample,
+  javaScriptAlert,
 }
 
 class SampleMenu extends StatelessWidget {
@@ -265,6 +285,9 @@ class SampleMenu extends StatelessWidget {
           case MenuOptions.videoExample:
             _onVideoExample(context);
             break;
+          case MenuOptions.javaScriptAlert:
+            _onJavaScriptAlertExample(context);
+            break;
         }
       },
       itemBuilder: (BuildContext context) => <PopupMenuItem<MenuOptions>>[
@@ -324,6 +347,10 @@ class SampleMenu extends StatelessWidget {
         const PopupMenuItem<MenuOptions>(
           value: MenuOptions.videoExample,
           child: Text('Video example'),
+        ),
+        const PopupMenuItem<MenuOptions>(
+          value: MenuOptions.javaScriptAlert,
+          child: Text('JavaScript Alert Example'),
         ),
       ],
     );
@@ -473,6 +500,14 @@ class SampleMenu extends StatelessWidget {
     return webViewController.loadHtmlString(kTransparentBackgroundPage);
   }
 
+  Future<void> _onJavaScriptAlertExample(BuildContext context) {
+    webViewController.setOnJavaScriptAlertDialogCallback((message) async {
+      return _showAlert(context, message);
+    });
+
+    return webViewController.loadHtmlString(kAlertTestPage);
+  }
+
   Widget _getCookieList(String cookies) {
     if (cookies == '""') {
       return Container();
@@ -496,6 +531,18 @@ class SampleMenu extends StatelessWidget {
     await indexFile.writeAsString(kLocalExamplePage);
 
     return indexFile.path;
+  }
+
+  Future<void> _showAlert(BuildContext context, String message) async {
+    return showDialog(context: context, builder: (BuildContext ctx) {
+      return AlertDialog(content: Text(message),
+        actions: [
+          TextButton(onPressed: () {
+            Navigator.of(ctx).pop();
+          }, child: const Text('OK'))
+        ],
+      );
+    });
   }
 }
 

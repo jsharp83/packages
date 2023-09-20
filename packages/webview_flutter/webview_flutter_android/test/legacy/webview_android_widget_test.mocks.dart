@@ -780,6 +780,36 @@ class MockWebChromeClient extends _i1.Mock implements _i2.WebChromeClient {
         returnValueForMissingStub: _i5.Future<void>.value(),
       ) as _i5.Future<void>);
   @override
+  _i5.Future<void> setHasJavaScriptAlertCallback(bool? value) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setHasJavaScriptAlertCallback,
+          [value],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+  @override
+  _i5.Future<void> setHasJavaScriptConfirmCallback(bool? value) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setHasJavaScriptConfirmCallback,
+          [value],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+  @override
+  _i5.Future<void> setHasJavaScriptPromptCallback(bool? value) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setHasJavaScriptPromptCallback,
+          [value],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+  @override
   _i2.WebChromeClient copy() => (super.noSuchMethod(
         Invocation.method(
           #copy,

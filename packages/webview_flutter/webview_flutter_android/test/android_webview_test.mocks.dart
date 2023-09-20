@@ -480,6 +480,51 @@ class MockTestWebChromeClientHostApi extends _i1.Mock
         ),
         returnValueForMissingStub: null,
       );
+  @override
+  void setHasJavaScriptAlertCallback(
+    int? instanceId,
+    bool? value,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #setHasJavaScriptAlertCallback,
+          [
+            instanceId,
+            value,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void setHasJavaScriptConfirmCallback(
+    int? instanceId,
+    bool? value,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #setHasJavaScriptConfirmCallback,
+          [
+            instanceId,
+            value,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void setHasJavaScriptPromptCallback(
+    int? instanceId,
+    bool? value,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #setHasJavaScriptPromptCallback,
+          [
+            instanceId,
+            value,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
 }
 
 /// A class which mocks [TestWebSettingsHostApi].
@@ -1175,6 +1220,36 @@ class MockWebChromeClient extends _i1.Mock implements _i2.WebChromeClient {
       (super.noSuchMethod(
         Invocation.method(
           #setSynchronousReturnValueForOnShowFileChooser,
+          [value],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+  @override
+  _i5.Future<void> setHasJavaScriptAlertCallback(bool? value) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setHasJavaScriptAlertCallback,
+          [value],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+  @override
+  _i5.Future<void> setHasJavaScriptConfirmCallback(bool? value) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setHasJavaScriptConfirmCallback,
+          [value],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+  @override
+  _i5.Future<void> setHasJavaScriptPromptCallback(bool? value) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setHasJavaScriptPromptCallback,
           [value],
         ),
         returnValue: _i5.Future<void>.value(),

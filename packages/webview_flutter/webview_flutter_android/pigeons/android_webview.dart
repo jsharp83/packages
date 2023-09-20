@@ -337,6 +337,21 @@ abstract class WebChromeClientHostApi {
     int instanceId,
     bool value,
   );
+
+  void setHasJavaScriptAlertCallback(
+      int instanceId,
+      bool value,
+      );
+
+  void setHasJavaScriptConfirmCallback(
+      int instanceId,
+      bool value,
+      );
+
+  void setHasJavaScriptPromptCallback(
+      int instanceId,
+      bool value,
+      );
 }
 
 @HostApi(dartHostTestHandler: 'TestAssetManagerHostApi')
@@ -379,6 +394,15 @@ abstract class WebChromeClientFlutterApi {
 
   /// Callback to Dart function `WebChromeClient.onGeolocationPermissionsHidePrompt`.
   void onGeolocationPermissionsHidePrompt(int identifier);
+
+  @async
+  void onHandleJavaScriptAlert(int instanceId, String message);
+
+  @async
+  bool onHandleJavaScriptConfirm(int instanceId, String message);
+
+  @async
+  String onHandleJavaScriptPrompt(int instanceId, String message, String defaultValue);
 }
 
 @HostApi(dartHostTestHandler: 'TestWebStorageHostApi')
