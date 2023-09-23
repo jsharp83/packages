@@ -603,7 +603,7 @@ class AndroidWebViewController extends PlatformWebViewController {
   }
 
   @override
-  Future<void> setJavaScriptAlertDialogCallback(
+  Future<void> setOnJavaScriptAlertDialogCallback(
       Future<void> Function(String message)
           javaScriptAlertDialogCallback) async {
     _onJavaScriptAlertCallback = javaScriptAlertDialogCallback;
@@ -611,7 +611,7 @@ class AndroidWebViewController extends PlatformWebViewController {
   }
 
   @override
-  Future<void> setJavaScriptConfirmDialogCallback(
+  Future<void> setOnJavaScriptConfirmDialogCallback(
       Future<bool> Function(String message)
           javaScriptConfirmDialogCallback) async {
     _onJavaScriptConfirmCallback = javaScriptConfirmDialogCallback;
@@ -619,7 +619,7 @@ class AndroidWebViewController extends PlatformWebViewController {
   }
 
   @override
-  Future<void> setJavaScriptTextInputDialogCallback(
+  Future<void> setOnJavaScriptTextInputDialogCallback(
       Future<String> Function(String message, String? defaultText)
           javaScriptTextInputDialogCallback) async {
     _onJavaScriptPromptCallback = javaScriptTextInputDialogCallback;
